@@ -1,0 +1,21 @@
+  pool: test
+ state: ONLINE
+  scan: scrub repaired 0 in 54h26m with 0 errors on Tue Aug 30 16:41:12 2016
+config:
+
+	NAME                                      STATE     READ WRITE CKSUM
+	backup                                    ONLINE       0     0     0
+	  raidz3-0                                ONLINE       0     0     0
+	    wwn-0x50014e0101010101                ONLINE       0     0     0
+	    wwn-0x50014e0202020202                ONLINE       0     0     0
+	    wwn-0x50014e0303030303                ONLINE       0     0     0
+	    wwn-0x50014e0404040404                ONLINE       0     0     0
+	    wwn-0x50014e0606060606                ONLINE       0     0     0
+	    wwn-0x50014e0707070707                ONLINE       0     0     0
+	cache
+	  wwn-0x690b11c00b6b61001f11111111111111  ONLINE       0     0     0
+	  wwn-0x690b11c00b6b61001f22222222222222  ONLINE       0     0     0
+	spares
+	  wwn-0x50014e0808080808                  AVAIL   
+
+errors: No known data errors

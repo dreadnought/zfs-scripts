@@ -1,0 +1,4 @@
+test	used	131554135920480	-
+test	available	49240834683040	-
+test	logicalused	158240438841344	-
+test	compressratio	1.25x	-

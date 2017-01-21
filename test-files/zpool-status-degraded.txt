@@ -1,0 +1,54 @@
+  pool: test
+ state: DEGRADED
+status: One or more devices are faulted in response to IO failures.
+action: Make sure the affected devices are connected, then run 'zpool clear'.
+   see: http://zfsonlinux.org/msg/ZFS-8000-HC
+  scan: scrub in progress since Sun Jan  8 00:24:04 2017
+    20.1T scanned out of 135T at 135M/s, 246h32m to go
+    8.94M repaired, 14.91% done
+config:
+
+	NAME                        STATE     READ WRITE CKSUM
+	data                        DEGRADED     1     0     0
+	  raidz3-0                  DEGRADED     4     0     0
+	    wwn-0x50014e0101010101  ONLINE       3     4     0
+	    wwn-0x50014e0202020202  ONLINE       3     4     0
+	    wwn-0x50014e0303030303  ONLINE       3     4     0
+	    wwn-0x50014e0404040404  ONLINE       3     4     0
+	    wwn-0x50014e0505050505  ONLINE       3     4     0
+	    wwn-0x50014e0606060606  ONLINE       3     4     0
+	    wwn-0x50014e0707070707  ONLINE       3     4     0
+	    wwn-0x50014e0808080808  ONLINE       3     4     0
+	    wwn-0x50014e0909090909  ONLINE       3     4     0
+	    wwn-0x50014e1010101010  ONLINE       3     4     0
+	    wwn-0x50014e1111111111  ONLINE       3     4     0
+	    wwn-0x50014e1212121212  ONLINE       3     4     0
+	    wwn-0x50014e1313131313  ONLINE      32     4     0  (repairing)
+	    wwn-0x50014e1414141414  ONLINE       3     4     0
+	    wwn-0x50014e1515151515  ONLINE       3     4     0
+	    wwn-0x50014e1616161616  ONLINE       3     4     0
+	    wwn-0x50014e1717171717  ONLINE       3     4     0
+	    wwn-0x50014e1818181818  ONLINE       3     4     0
+	    wwn-0x50014e1919191919  ONLINE       3     4     0
+	    wwn-0x50014e2020202020  ONLINE       3     4     0
+	    wwn-0x50014e2121212121  UNAVAIL      0     0     0  (repairing)
+	    wwn-0x50014e2222222222  ONLINE       3     4     0
+	    wwn-0x50014e2323232323  ONLINE       3     4     0
+	    wwn-0x50014e2424242424  ONLINE       3     4     0
+	    wwn-0x50014e2525252525  ONLINE       3     4     0
+	    wwn-0x50014e2626262626  ONLINE       3     4     0
+	    wwn-0x50014e2727272727  ONLINE       3     4     0
+	    wwn-0x50014e2828282828  ONLINE       3     4     0
+	    wwn-0x50014e2929292929  ONLINE     379     4     0  (repairing)
+	    wwn-0x50014e3030303030  ONLINE       3     4     0
+	    wwn-0x50014e3131313131  ONLINE     295     4     0  (repairing)
+	    wwn-0x50014e3232323232  ONLINE       3     4     0
+	    wwn-0x50014e3333333333  ONLINE       3     4     0
+	    wwn-0x50014e3434343434  ONLINE      11    47     0
+	    wwn-0x50014e3535353535  ONLINE      36    45     0
+	cache
+	  nvme-INTEL                ONLINE       0     0     0
+	spares
+	  wwn-0x50014e3636363636    AVAIL   
+
+errors: 1 data errors, use '-v' for a list

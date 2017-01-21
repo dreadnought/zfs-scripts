@@ -1,0 +1,54 @@
+  pool: test
+ state: DEGRADED
+status: One or more devices is currently being resilvered.  The pool will
+	continue to function, possibly in a degraded state.
+action: Wait for the resilver to complete.
+  scan: resilver in progress since Thu Jan 19 21:59:13 2017
+    90.3T scanned out of 135T at 681M/s, 18h57m to go
+    2.48T resilvered, 67.09% done
+config:
+
+	NAME                          STATE     READ WRITE CKSUM
+	data                          DEGRADED     0     0     0
+	  raidz3-0                    DEGRADED     0     0     0
+	    wwn-0x50014e0101010101    ONLINE       0     0     0
+	    wwn-0x50014e0202020202    ONLINE       0     0     0
+	    wwn-0x50014e0303030303    ONLINE       0     0     0
+	    wwn-0x50014e0404040404    ONLINE       0     0     0
+	    wwn-0x50014e0505050505    ONLINE       0     0     0
+	    wwn-0x50014e0606060606    ONLINE       0     0     0
+	    wwn-0x50014e0707070707    ONLINE       0     0     0
+	    wwn-0x50014e0808080808    ONLINE       0     0     0
+	    wwn-0x50014e0909090909    ONLINE       0     0     0
+	    wwn-0x50014e1010101010    ONLINE       0     0     0
+	    wwn-0x50014e1111111111    ONLINE       0     0     0
+	    wwn-0x50014e1212121212    ONLINE       0     0     0
+	    wwn-0x50014e1313131313    ONLINE      89     0     0
+	    wwn-0x50014e1414141414    ONLINE       0     0     0
+	    wwn-0x50014e1515151515    ONLINE       0     0     0
+	    wwn-0x50014e1616161616    ONLINE       0     0     0
+	    wwn-0x50014e1717171717    ONLINE       0     0     0
+	    wwn-0x50014e1818181818    ONLINE       0     0     0
+	    wwn-0x50014e1919191919    ONLINE       0     0     0
+	    wwn-0x50014e2020202020    ONLINE       0     0     0
+	    replacing-20              DEGRADED     0     0     0
+	      646604201787705167      UNAVAIL      0     0     0  was /dev/disk/by-id/wwn-0x50014effffffffff-part1
+	      wwn-0x50014e2121212121  ONLINE       0     0     0  (resilvering)
+	    wwn-0x50014e2222222222    ONLINE       0     0     0
+	    wwn-0x50014e2323232323    ONLINE       0     0     0
+	    wwn-0x50014e2424242424    ONLINE       0     0     0
+	    wwn-0x50014e2525252525    ONLINE       0     0     0
+	    wwn-0x50014e2626262626    ONLINE       0     0     0
+	    wwn-0x50014e2727272727    ONLINE       0     0     0
+	    wwn-0x50014e2828282828    ONLINE       0     0     0
+	    wwn-0x50014e2929292929    ONLINE   3.46K     0     0  (resilvering)
+	    wwn-0x50014e3030303030    ONLINE       0     0     0
+	    wwn-0x50014e3131313131    OFFLINE    638     0     0
+	    wwn-0x50014e3232323232    ONLINE       0     0     0
+	    wwn-0x50014e3333333333    ONLINE       0     0     0
+	    wwn-0x50014e3434343434    ONLINE       0     0     0
+	    wwn-0x50014e3535353535    ONLINE       0     0     0
+	cache
+	  nvme-INTEL                  ONLINE       0     0     0
+
+errors: No known data errors
