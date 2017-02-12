@@ -119,7 +119,7 @@ elif percent > opt_warn:
 	print("WARNING - pool '%s' %s" % (pool['pool'], percent_string), end=" ")
 	exit_code = 1
 elif pool['scan'].startswith('scrub in progress'):
-	print("OK - %s%s" % pool['scan'], scan_status, end=" ")
+	print("OK - pool '%s' scrub in progress%s\n%s" % (pool['pool'], scan_str, pool['scan']), end=" ")
 else:
 	print("OK - pool '%s' %s" % (pool['pool'], percent_string), end=" ")
 
