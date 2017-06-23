@@ -6,25 +6,29 @@ import time
 import hashlib
 
 def get_output(cmd, timeout=0, timeout_ok=False):
-	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, universal_newlines=True)
+	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 	lines = []
 	if timeout > 0:
 		if not timeout_loop(timeout, proc):
 			print("timeout", end=" ")
 			proc.kill()
 			if not timeout_ok:
-				return False
+				return False, ['timeout', len(lines)]
 			lines.append('timeout')
 	while True:
 		line = proc.stdout.readline().strip()
 		if len(line) == 0:
 			break
 		lines.append(line)
+	stderr = proc.stderr.readlines()
+	if len(stderr) > 0:
+		print("Error:", stderr)
+		return False, ['error']
 
 	if len(lines) == 1 and lines[0] == 'timeout':
 		print("only", end=" ")
-		return False
-	return lines
+		return False, ['timeout', 0]
+	return True, lines
 
 def timeout_loop(seconds, proc):
 	done = 0
@@ -58,23 +62,25 @@ def scan_snapshots(volume, snapshots, cache):
 		cache_result = get_from_cache(command_hash, cache)
 		if cache_result:
 			print('(cached)', end=" ")
-			zfs_diff = True
+			success = True
 			if cache_result.startswith('>'):
 				zfs_diff_len = cache_result
 			else:
 				zfs_diff_len = int(cache_result)
 		else:
-			zfs_diff = get_output(command, timeout=120, timeout_ok=True)
-			if zfs_diff != False:
-				zfs_diff_len = len(zfs_diff)
-		if zfs_diff == False:
-			# timeout
-			add_to_cache(command_hash, '>0', cache)
+			success, output_lines = get_output(command, timeout=120, timeout_ok=True)
+			if success:
+				zfs_diff_len = len(output_lines)
+		if not success:
+			if 'timeout' in output_lines:
+				add_to_cache(command_hash, '>0', cache)
+			elif 'error' in output_lines:
+				pass
 		elif zfs_diff_len != 0:
 			print('changes:', zfs_diff_len, end=" ")
 			if not cache_result:
 				cache_value = int(zfs_diff_len)
-				if type(zfs_diff) == list and zfs_diff[0] == 'timeout':
+				if success and output_lines[0] == 'timeout':
 					cache_value = ">%s" % (int(cache_value) - 1)
 				add_to_cache(command_hash, cache_value, cache)
 		elif zfs_diff_len == 0:
@@ -116,7 +122,7 @@ def get_from_cache(hash, cache):
 	else:
 		False
 
-zfs_list = get_output(['/sbin/zfs', 'list', '-H', '-o', 'name'])
+success, zfs_list = get_output(['/sbin/zfs', 'list', '-H', '-o', 'name'])
 volumes = collections.OrderedDict()
 todo = []
 cache_file = '/var/cache/zfs-snapshots-diff.txt'
@@ -124,7 +130,7 @@ cache_file = '/var/cache/zfs-snapshots-diff.txt'
 for line in zfs_list:
 	volumes[line] = {'snapshots': []}
 
-zfs_list_snapshots = get_output(['/sbin/zfs', 'list', '-H', '-o', 'name', '-t', 'snapshot'])
+success, zfs_list_snapshots = get_output(['/sbin/zfs', 'list', '-H', '-o', 'name', '-t', 'snapshot'])
 for line in zfs_list_snapshots:
 	volume, snapshot = line.split('@', 1)
 	if snapshot.startswith('rsync_'):
