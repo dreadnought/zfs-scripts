@@ -104,8 +104,10 @@ if scan_split[1] == 'in' and scan_split[2] == 'progress':
 	match = re.search(r'\s[0-9\.]+% done$', pool['scan'])
 	scan_progress = match.group(0)
 	scan_str = " (%s %s)" % (scan_reason, scan_progress)
+	scan_perfdata = "progress=%s" % scan_progress.split("%")[0].strip()
 else:
 	scan_str = ""
+	scan_perfdata = ""
 
 exit_code = 0
 if pool['state'] != 'ONLINE':
@@ -123,5 +125,5 @@ elif pool['scan'].startswith('scrub in progress'):
 else:
 	print("OK - pool '%s' %s" % (pool['pool'], percent_string), end=" ")
 
-print('|', perfdata)
+print('|', perfdata, scan_perfdata)
 sys.exit(exit_code)
